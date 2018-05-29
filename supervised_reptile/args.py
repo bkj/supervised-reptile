@@ -14,8 +14,7 @@ def argument_parser():
     Get an argument parser for a training script.
     """
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('--pretrained', help='evaluate a pre-trained model',
-                        action='store_true', default=False)
+    parser.add_argument('--pretrained', help='evaluate a pre-trained model', action='store_true', default=False)
     parser.add_argument('--seed', help='random seed', default=0, type=int)
     parser.add_argument('--checkpoint', help='checkpoint directory', default='model_checkpoint')
     parser.add_argument('--classes', help='number of classes per inner task', default=5, type=int)
@@ -26,8 +25,7 @@ def argument_parser():
     parser.add_argument('--replacement', help='sample with replacement', action='store_true')
     parser.add_argument('--learning-rate', help='Adam step size', default=1e-3, type=float)
     parser.add_argument('--meta-step', help='meta-training step size', default=0.1, type=float)
-    parser.add_argument('--meta-step-final', help='meta-training step size by the end',
-                        default=0.1, type=float)
+    parser.add_argument('--meta-step-final', help='meta-training step size by the end', default=0.1, type=float)
     parser.add_argument('--meta-batch', help='meta-training batch size', default=1, type=int)
     parser.add_argument('--meta-iters', help='meta-training iterations', default=400000, type=int)
     parser.add_argument('--eval-batch', help='eval inner batch size', default=5, type=int)
@@ -37,8 +35,7 @@ def argument_parser():
     parser.add_argument('--weight-decay', help='weight decay rate', default=1, type=float)
     parser.add_argument('--transductive', help='evaluate all samples at once', action='store_true')
     parser.add_argument('--foml', help='use FOML instead of Reptile', action='store_true')
-    parser.add_argument('--foml-tail', help='number of shots for the final mini-batch in FOML',
-                        default=None, type=int)
+    parser.add_argument('--foml-tail', help='number of shots for the final mini-batch in FOML', default=None, type=int)
     parser.add_argument('--sgd', help='use vanilla SGD instead of Adam', action='store_true')
     return parser
 

@@ -23,8 +23,8 @@ def main():
 
     train_set, test_set = split_dataset(read_dataset(DATA_DIR))
     train_set = list(augment_dataset(train_set))
-    test_set = list(test_set)
-
+    test_set  = list(test_set)
+    
     model = OmniglotModel(args.classes, **model_kwargs(args))
 
     with tf.Session() as sess:

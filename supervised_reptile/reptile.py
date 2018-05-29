@@ -7,8 +7,7 @@ import random
 
 import tensorflow as tf
 
-from .variables import (interpolate_vars, average_vars, subtract_vars, add_vars, scale_vars,
-                        VariableState)
+from .variables import (interpolate_vars, average_vars, subtract_vars, add_vars, scale_vars, VariableState)
 
 class Reptile:
     """
@@ -70,6 +69,7 @@ class Reptile:
                 self.session.run(minimize_op, feed_dict={input_ph: inputs, label_ph: labels})
             new_vars.append(self._model_state.export_variables())
             self._model_state.import_variables(old_vars)
+        
         new_vars = average_vars(new_vars)
         self._model_state.import_variables(interpolate_vars(old_vars, new_vars, meta_step_size))
 
@@ -124,14 +124,15 @@ class Reptile:
 
     def _test_predictions(self, train_set, test_set, input_ph, predictions):
         if self._transductive:
-            inputs, _ = zip(*test_set)
-            return self.session.run(predictions, feed_dict={input_ph: inputs})
-        res = []
-        for test_sample in test_set:
-            inputs, _ = zip(*train_set)
-            inputs += (test_sample[0],)
-            res.append(self.session.run(predictions, feed_dict={input_ph: inputs})[-1])
-        return res
+          inputs, _ = zip(*test_set)
+          return self.session.run(predictions, feed_dict={input_ph: inputs})
+        else:
+          res = []
+          for test_sample in test_set:
+              inputs, _ = zip(*train_set)
+              inputs += (test_sample[0],)
+              res.append(self.session.run(predictions, feed_dict={input_ph: inputs})[-1])
+          return res
 
 class FOML(Reptile):
     """
